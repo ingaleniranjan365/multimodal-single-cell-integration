@@ -116,24 +116,46 @@ def get_row_sampled_matrix(file: h5py.File, matrix_path: str, row_index_path: st
     return sampled_matrix
 
 
-cell_id_sampling_size = 100
-genomic_coordinates_sampling_size = 200
-train_multi_inputs_path = '/Users/niranjani/code/multimodal-single-cell-integration/data/raw_data/train_multi_inputs.h5'
-cell_ids_path = 'train_multi_inputs/axis1'
-genomic_coordinates_path = 'train_multi_inputs/block0_items'
-chromatin_accessibility_matrix_path = 'train_multi_inputs/block0_values'
-chromatin_accessibility_of_sample_cells_path = 'data/subset'
+if __name__ == '__main__':
+    output_path = 'data/subset'
+    cell_id_sampling_size = 100
 
-write_subset_as_sparse_matrix_dataframe(
-    train_multi_inputs_path,
-    cell_ids_path,
-    genomic_coordinates_path,
-    chromatin_accessibility_matrix_path,
-    chromatin_accessibility_of_sample_cells_path,
-    cell_id_sampling_size,
-    genomic_coordinates_sampling_size,
-    "cell_ids",
-    "genomic_coordinates",
-    "multiome_chromatin_accessibility",
-    "chromatin_accessibility"
-)
+    genomic_coordinates_sampling_size = 200
+    train_multi_inputs_path = '/Users/niranjani/code/multimodal-single-cell-integration/data/raw_data/train_multi_inputs.h5'
+    cell_ids_path = 'train_multi_inputs/axis1'
+    genomic_coordinates_path = 'train_multi_inputs/block0_items'
+    chromatin_accessibility_matrix_path = 'train_multi_inputs/block0_values'
+
+    write_subset_as_sparse_matrix_dataframe(
+        train_multi_inputs_path,
+        cell_ids_path,
+        genomic_coordinates_path,
+        chromatin_accessibility_matrix_path,
+        output_path,
+        cell_id_sampling_size,
+        genomic_coordinates_sampling_size,
+        "cell_ids",
+        "genomic_coordinates",
+        "multiome_chromatin_accessibility",
+        "chromatin_accessibility"
+    )
+
+    genes_sampling_size = 50
+    train_multi_targets_path = '/Users/niranjani/code/multimodal-single-cell-integration/data/raw_data/train_multi_targets.h5'
+    cell_ids_path = 'train_multi_targets/axis1'
+    genes_path = 'train_multi_targets/block0_items'
+    gene_expression_matrix_path = 'train_multi_targets/block0_values'
+
+    write_subset_as_sparse_matrix_dataframe(
+        train_multi_targets_path,
+        cell_ids_path,
+        genes_path,
+        gene_expression_matrix_path,
+        output_path,
+        cell_id_sampling_size,
+        genes_sampling_size,
+        "cell_ids",
+        "genes",
+        "multiome_gene_expression",
+        "gene_expression"
+    )
