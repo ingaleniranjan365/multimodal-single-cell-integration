@@ -53,8 +53,6 @@ def partition_dataset(
         logger.info(
             f"generate output file - {output_path}/subset_{start_index + 1}/{dataset_label}/sparse_matrix({matrix_label})")
 
-        break  # this line is for dev purpose, to be deleted
-
 
 if __name__ == '__main__':
     spark = get_spark_session()
