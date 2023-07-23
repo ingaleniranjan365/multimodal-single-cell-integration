@@ -17,7 +17,6 @@ def get_spark_session() -> SparkSession:
         .config("spark.driver.memory", "2g") \
         .getOrCreate()
 
-
 def partition_dataset(
         spark: SparkSession,
         batch_size: int,
@@ -58,13 +57,8 @@ if __name__ == '__main__':
     spark = get_spark_session()
 
     output_path = 'data/subsets'
-    cell_id_sampling_size = 100
     batch_size = 10
-
-    genomic_coordinates_sampling_size = 200
     train_multi_inputs_path = '/Users/niranjani/code/multimodal-single-cell-integration/data/raw_data/train_multi_inputs.h5'
-    cell_ids_path = 'train_multi_inputs/axis1'
-    genomic_coordinates_path = 'train_multi_inputs/block0_items'
     chromatin_accessibility_matrix_path = 'train_multi_inputs/block0_values'
 
     partition_dataset(
