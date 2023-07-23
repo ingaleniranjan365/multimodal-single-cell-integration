@@ -1,12 +1,14 @@
+import logging
 from typing import Tuple, Dict
 
 import h5py
 import hdf5plugin
 import numpy as np
-from pyspark.ml.regression import LinearRegression, Regressor, RegressionModel
+from pyspark.ml.regression import LinearRegression
 from pyspark.sql import SparkSession, DataFrame
 from pyspark.sql.types import Row
 
+logging.info(f"hdf5plugin at ({hdf5plugin.PLUGIN_PATH}) is necessary for h5py to work")
 
 def get_spark_session() -> SparkSession:
     return SparkSession.builder \
@@ -64,28 +66,13 @@ def get_training_df(training_features: DataFrame, metadata: Dict) -> DataFrame:
     return training_df
 
 
-def get_regressor(features_col: str, label_col: str) -> Regressor:
-    return LinearRegression(featuresCol=features_col, labelCol=label_col)
-
-
-def train_model(regressor: Regressor, training_df: DataFrame) -> RegressionModel:
-    return regressor.fit(training_df)
-
-
-def predict(gene_id_index: int):
-    training_df, testing_df = get_training_df(metadata={"gene_id_index": gene_id_index})
-    regressor = get_regressor("features", "target")
-    model = train_model(regressor, training_df)
-    predictions = model.transform(testing_df)
-    predictions.show()
-
-
 if __name__ == '__main__':
-    regressor = get_regressor("features", "target")
+    lr = LinearRegression(featuresCol="features", labelCol="target")
     train_features = get_train_features()
     test_features = get_test_features()
     gene_ids_indices = [17302, 17303, 17304, 17305, 17306]
     for gene_id_index in gene_ids_indices:
         training_df = get_training_df(train_features, metadata={"gene_id_index": gene_id_index})
-        model = train_model(regressor, training_df)
+        model = lr.fit(training_df)
         predictions = model.transform(test_features)
+        predictions.show()
