@@ -121,7 +121,7 @@ if __name__ == '__main__':
     cell_id_sampling_size = 100
 
     genomic_coordinates_sampling_size = 200
-    train_multi_inputs_path = '/Users/niranjani/code/multimodal-single-cell-integration/data/raw_data/train_multi_inputs.h5'
+    train_multi_inputs_path = '/data/raw_data/train_multi_inputs.h5'
     cell_ids_path = 'train_multi_inputs/axis1'
     genomic_coordinates_path = 'train_multi_inputs/block0_items'
     chromatin_accessibility_matrix_path = 'train_multi_inputs/block0_values'
@@ -141,7 +141,7 @@ if __name__ == '__main__':
     )
 
     genes_sampling_size = 50
-    train_multi_targets_path = '/Users/niranjani/code/multimodal-single-cell-integration/data/raw_data/train_multi_targets.h5'
+    train_multi_targets_path = '/data/raw_data/train_multi_targets.h5'
     cell_ids_path = 'train_multi_targets/axis1'
     genes_path = 'train_multi_targets/block0_items'
     gene_expression_matrix_path = 'train_multi_targets/block0_values'

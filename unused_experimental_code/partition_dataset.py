@@ -56,9 +56,9 @@ def partition_dataset(
 if __name__ == '__main__':
     spark = get_spark_session()
 
-    output_path = 'data/subsets'
+    output_path = '../data/subsets'
     batch_size = 10
-    train_multi_inputs_path = '/Users/niranjani/code/multimodal-single-cell-integration/data/raw_data/train_multi_inputs.h5'
+    train_multi_inputs_path = '/data/raw_data/train_multi_inputs.h5'
     chromatin_accessibility_matrix_path = 'train_multi_inputs/block0_values'
 
     partition_dataset(
