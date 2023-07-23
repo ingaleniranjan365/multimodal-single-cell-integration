@@ -85,7 +85,7 @@ if __name__ == '__main__':
     train_features = get_train_features()
     test_features = get_test_features()
     gene_ids_indices = [17302, 17303, 17304, 17305, 17306]
-    for gene_id_index in gene_ids_indices[:1]:
+    for gene_id_index in gene_ids_indices:
         training_df = get_training_df(train_features, metadata={"gene_id_index": gene_id_index})
         model = train_model(regressor, training_df)
         predictions = model.transform(test_features)
